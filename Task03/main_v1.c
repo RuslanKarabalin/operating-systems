@@ -1,21 +1,14 @@
+#include <stdio.h>
 #include <dirent.h>
-#include <iostream>
 #include <string.h>
-#include <string>
 #include <sys/stat.h>
 #include <unistd.h>
 
 struct cgetcwd_r {
   int error = 0;
-  std::string path = "";
+  string path = "";
   int count_of_symlink = 0;
 };
-
-std::ostream &operator<<(std::ostream &os, cgetcwd_r r) {
-  return os << "Error: " << r.error << "\n"
-            << "Path: " << r.path << "\n"
-            << "Count of symbolic links: " << r.count_of_symlink << "\n";
-}
 
 cgetcwd_r cgetcwd() {
   // variable for result
@@ -112,6 +105,8 @@ cgetcwd_r cgetcwd() {
 }
 
 int main() {
-  std::cout << cgetcwd();
+  printf("Error: %s\n", r.error);
+  printf("Path: %s\n", r.path);
+  printf("Count of symbolic links: %s\n", r.count_of_symlink);
   return 0;
 }
